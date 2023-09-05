@@ -32,7 +32,7 @@ app.post('/sms', async (req, res) => {
     const chatGPT = await getRespuesta(mensaje);
     let respuesta;
     try {
-      respuesta = chatGPT.choices[0].text;
+      respuesta = chatGPT.cgithoices[0].text;
     } catch {
       respuesta = 'Error en chatGPT: no me puedo comunicar';
     }
