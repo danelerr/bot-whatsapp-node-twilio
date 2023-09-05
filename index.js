@@ -15,11 +15,9 @@ app.post('/sms', (req, res) => {
 
     const mensaje = req.body.Body;
 
-    console.log(mensaje);
-
     //consumir la api de chatGPT
     let chatGPT;
-    if (message.charAt(mensaje.length-1) === '?') {
+    if (mensaje.charAt(mensaje.length-1) === '?') {
       const num = Math.random();
       if (num >= 0.5) {
         chatGPT = 'Si';
@@ -29,6 +27,7 @@ app.post('/sms', (req, res) => {
     } else {
       chatGPT = 'Soy la respuesta de Node.js';
     }
+    console.log(chatGPT);
     twiml.message(chatGPT);
     res.type('text/xml').send(twiml.toString());
 });
