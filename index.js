@@ -12,7 +12,24 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.post('/sms', (req, res) => {
     console.log(req.body);
     const twiml = new MessagingResponse();
-    twiml.message('The Robots are coming! Head for the hills!');
+
+    const mensaje = req.body.Body;
+
+    console.log(mensaje);
+
+    //consumir la api de chatGPT
+    let chatGPT;
+    if (message.charAt(mensaje.length-1) === '?') {
+      const num = Math.random();
+      if (num >= 0.5) {
+        chatGPT = 'Si';
+      } else {
+        chatGPT = 'No';
+      }
+    } else {
+      chatGPT = 'Soy la respuesta de Node.js';
+    }
+    twiml.message(chatGPT);
     res.type('text/xml').send(twiml.toString());
 });
 
