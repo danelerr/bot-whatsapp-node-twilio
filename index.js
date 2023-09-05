@@ -5,7 +5,7 @@ const OpenAI = require("openai");
 
 const app = express();
 
-const openai = new OpenAI({ apiKey: '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'});
+const openai = new OpenAI({ apiKey: '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'});
 
 app.use(express.json());
 app.use(bodyParser.json());
@@ -28,13 +28,14 @@ app.post('/sms', async (req, res) => {
     const twiml = new MessagingResponse();
 
     const mensaje = req.body.Body;
-
-    const chatGPT = await getRespuesta(mensaje);
+  
     let respuesta;
     try {
-      respuesta = chatGPT.cgithoices[0].text;
-    } catch {
+      const chatGPT = await getRespuesta(mensaje);
+      respuesta = chatGPT.choices[0].text;
+    } catch (err) {
       respuesta = 'Error en chatGPT: no me puedo comunicar';
+      console.log(err);
     }
     twiml.message(respuesta);
     res.type('text/xml').send(twiml.toString());
