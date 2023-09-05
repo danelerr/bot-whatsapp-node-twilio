@@ -2,10 +2,13 @@ const express = require('express');
 const { MessagingResponse } = require('twilio').twiml;
 const bodyParser = require('body-parser');
 const OpenAI = require("openai");
+const {config} = require('dotenv');
+
+config();
 
 const app = express();
 
-const openai = new OpenAI({ apiKey: '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'});
+const openai = new OpenAI({ apiKey: process.env.CHATGPT_API_KEY});
 
 app.use(express.json());
 app.use(bodyParser.json());
