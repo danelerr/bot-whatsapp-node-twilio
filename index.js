@@ -3,6 +3,8 @@ const { MessagingResponse } = require('twilio').twiml;
 const bodyParser = require('body-parser');
 const OpenAI = require("openai");
 const {config} = require('dotenv');
+const path = require('path');
+
 
 config();
 
@@ -26,6 +28,16 @@ async function getRespuesta(text) {
   return completion;
 }
 
+app.get('/', (req, res) => {
+  res.send('api para topicos <strong>avanzados de progración</strong>');
+});
+
+app.get('/dariana', (req, res) => {
+  const imagePath = path.join(__dirname, 'images/dariana.jpeg');
+  res.sendFile(imagePath);
+});
+
+
 app.post('/sms', async (req, res) => {
 
     const twiml = new MessagingResponse();
@@ -43,6 +55,7 @@ app.post('/sms', async (req, res) => {
     twiml.message(respuesta);
     res.type('text/xml').send(twiml.toString());
 });
+
 
 app.listen(3000, () => {
     console.log('Express server listening on port 3000');
