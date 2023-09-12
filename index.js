@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
   res.send('api para topicos <strong>avanzados de progración</strong>');
 });
 
-app.get('/dariana', (req, res) => {
+app.get('/dariana.jpeg', (req, res) => {
   const imagePath = path.join(__dirname, 'images/dariana.jpeg');
   res.sendFile(imagePath);
 });
