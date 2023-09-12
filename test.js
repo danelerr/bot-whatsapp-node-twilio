@@ -4,11 +4,12 @@ const fetch = require('node-fetch');
 const apiUrl = 'https://api.d-id.com/animations';
 
 // Credenciales de autorización (USERNAME y PASSWORD)
-
+const username = 'ZGFuaWVsY3VldG9ycmljb0BnbWFpbC5jb20';
+const password = '8JsFSBV_L7kDtRxHLsWNG';
 
 // Datos de la solicitud en formato JSON
 const requestData = {
-  source_url: 'https://twilio-nodejs-bot-whatsapp-chatgpt.onrender.com/dariana'
+  source_url: 'https://twilio-nodejs-bot-whatsapp-chatgpt.onrender.com/dariana.jpeg'
 };
 
 // Configura los encabezados de la solicitud
