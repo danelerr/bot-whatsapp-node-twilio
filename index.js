@@ -57,8 +57,9 @@ app.post('/sms', async (req, res) => {
     const url = await getVideoUrl(mensaje);
 
     const msg = twiml.message("Tu video");
-
-    msg.media(url);
+    if (url) {
+      msg.media(url);
+    }
 
     res.type('text/xml').send(twiml.toString());
 });
