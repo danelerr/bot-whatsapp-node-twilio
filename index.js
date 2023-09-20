@@ -4,11 +4,20 @@ const bodyParser = require('body-parser');
 const OpenAI = require("openai");
 const {config} = require('dotenv');
 const path = require('path');
+const http = require('http');
+const { Server: SocketServer } = require('socket.io');
 
 
 config();
 
 const app = express();
+const server = http.createServer(app);
+
+const io = new SocketServer(server);
+
+io.on('connection', socket => {
+  console.log('alguien se conecto a mi');
+});
 
 const openai = new OpenAI({ apiKey: process.env.CHATGPT_API_KEY});
 
@@ -45,6 +54,8 @@ app.post('/sms', async (req, res) => {
     
     const msg = twiml.message("Tu el audio solicitado: ");
     msg.media(audioUrl);
+
+    io.emit('audiox', audioUrl);
 
     console.log(audioUrl);
     res.type('text/xml').send(twiml.toString());
@@ -132,6 +143,6 @@ app.post('/sms', async (req, res) => {
 
 
 
-app.listen(3000, () => {
+server.listen(3000, () => {
     console.log('Express server listening on port 3000');
 });
