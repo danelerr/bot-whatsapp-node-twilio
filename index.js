@@ -6,7 +6,7 @@ const {config} = require('dotenv');
 const path = require('path');
 const http = require('http');
 const { Server: SocketServer } = require('socket.io');
-
+const cors = require("cors");
 
 config();
 
@@ -14,6 +14,8 @@ const app = express();
 const server = http.createServer(app);
 
 const io = new SocketServer(server);
+
+app.use(cors());
 
 io.on('connection', socket => {
   console.log('alguien se conecto a mi');
@@ -55,7 +57,7 @@ app.post('/sms', async (req, res) => {
     const msg = twiml.message("Tu el audio solicitado: ");
     msg.media(audioUrl);
 
-    io.emit('audiox', audioUrl);
+    io.emit('pruebita', audioUrl);
 
     console.log(audioUrl);
     res.type('text/xml').send(twiml.toString());
