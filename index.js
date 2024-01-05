@@ -49,19 +49,20 @@ app.post('/sms', async (req, res) => {
 
     const mensaje = req.body.Body;
 
-    const searchText = encodeURI(mensaje);
+    // const searchText = encodeURI(mensaje);
 
-    const musicSearhQuery = await fetch(`https://audius-discovery-2.theblueprint.xyz/v1/tracks/search?query=${searchText} b2b&app_name=EXAMPLEAPP`)
-      .then((res) => res.json());
+    // const musicSearhQuery = await fetch(`https://audius-discovery-2.theblueprint.xyz/v1/tracks/search?query=${searchText} b2b&app_name=EXAMPLEAPP`)
+    //   .then((res) => res.json());
 
-    const id = musicSearhQuery.data[0].id;
+    // const id = musicSearhQuery.data[0].id;
 
-    const audioUrl = `https://audius-discovery-2.theblueprint.xyz/v1/tracks/${id}/stream?app_name=EXAMPLEAPP`;
+    // const audioUrl = `https://audius-discovery-2.theblueprint.xyz/v1/tracks/${id}/stream?app_name=EXAMPLEAPP`;
     
-    const msg = twiml.message("Tu el audio solicitado: ");
-    msg.media(audioUrl);
+    // const msg = twiml.message("Tu el audio solicitado: ");
+    // msg.media(audioUrl);
+    twiml.message("Tu el video solicitado: ")
 
-    io.emit('pruebita', audioUrl);
+    io.emit('pruebita', mensaje);
 
     console.log(audioUrl);
     res.type('text/xml').send(twiml.toString());
